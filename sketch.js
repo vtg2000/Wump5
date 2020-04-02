@@ -71,7 +71,7 @@ function setup() {
       gxr = int(random(0,7));
       gyr = int(random(0,7));
     }
-  board[gyr][gxr] += 'G';
+  board[gyr][gxr] += ' G';
 
   for(let i =0; i<4; i++)
   {
