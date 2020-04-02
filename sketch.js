@@ -176,8 +176,6 @@ function draw() {
   let offset = 70;
   textAlign(CENTER, CENTER);
 
-
-
   button = createButton('Hide');
   button.position(230,500);
   button.mousePressed(hide);
@@ -227,16 +225,7 @@ function draw() {
         // not inside
         fill(255);
       }
-
-      if(dupb[y][x] == null)
-      {
-        stroke(0);
-        rect(xpos+50*10, ypos, 50, 50);
-        fill(0);
-        noStroke();
-        textSize(20);
-        text('', xpos+50*10, ypos, 50,50);
-      }     // colorMode(RGB);
+   // colorMode(RGB);
     }
   }
 
@@ -405,9 +394,9 @@ function draw() {
    text('B - Breeze', 1200, 310)
    stroke(2)
    text('Wumpus World', 770, 50)
-  //  let fps = frameRate();
-  // text("FPS: " + fps.toFixed(2), 10, height - 10);
-  //  stroke(1)
+   let fps = frameRate();
+  text("FPS: " + fps.toFixed(2), 10, height - 10);
+   stroke(1)
    
   if(anim)
   {
@@ -505,7 +494,6 @@ function draw() {
   }
 }
 
-  
 }
 
 
