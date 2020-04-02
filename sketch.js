@@ -405,9 +405,9 @@ function draw() {
    text('B - Breeze', 1200, 310)
    stroke(2)
    text('Wumpus World', 770, 50)
-   let fps = frameRate();
-  text("FPS: " + fps.toFixed(2), 10, height - 10);
-   stroke(1)
+  //  let fps = frameRate();
+  // text("FPS: " + fps.toFixed(2), 10, height - 10);
+  //  stroke(1)
    
   if(anim)
   {
