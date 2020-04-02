@@ -287,6 +287,22 @@ function draw() {
     noStroke();
     textSize(20);
     text('You got the gold ', offset +680, offset +430);
+    if(y-1>=0 && !((dupb[y-1][x]).includes('B')) && !(dupb[y-1][x].includes('S')))
+    {
+      dupb[y-1][x] = 'safe';
+    }
+    if(x-1>=0 && !((dupb[y][x-1]).includes('B')) && !(dupb[y][x-1].includes('S')))
+    {
+      dupb[y][x-1] = 'safe';
+    }
+    if(y+1<=7 && !((dupb[y+1][x]).includes('B')) && !(dupb[y+1][x].includes('S')))
+    {
+      dupb[y+1][x] = 'safe';
+    }
+    if(x+1<=7 && !((dupb[y][x+1]).includes('B')) && !(dupb[y][x+1].includes('S')))
+    {
+      dupb[y][x+1] = 'safe';
+    }
   }
   else if(!(board[starty][startx].includes('S')) && !(board[starty][startx].includes('B')))
   {
