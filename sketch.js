@@ -8,13 +8,16 @@ let starty = 7;
 let xr;
 let yr;
 let wdead = 0;
+let anim = 0;
 let hideen = 0;
+p5.disableFriendlyErrors = true;
 function setup() {
   background(255)
   wdead = 0;
   startx = 0;
   starty = 7;
   hidden = 0;
+  anim = 0;
   createCanvas(windowWidth, windowHeight);
   dead = 0;
   for(let i =0; i<64; i++){
@@ -151,7 +154,7 @@ function setup() {
   
 
   colorMode(RGB);
-  frameRate(60);
+  // frameRate(60);
 }
 
 
@@ -173,11 +176,15 @@ function draw() {
   let offset = 70;
   textAlign(CENTER, CENTER);
 
- 
+
 
   button = createButton('Hide');
   button.position(230,500);
   button.mousePressed(hide);
+
+  button = createButton('Animate');
+  button.position(300,500);
+  button.mousePressed(animate);
 
 
   for (let y = 0; y <8; y++) {
@@ -398,21 +405,131 @@ function draw() {
    text('B - Breeze', 1200, 310)
    stroke(2)
    text('Wumpus World', 770, 50)
+   let fps = frameRate();
+  text("FPS: " + fps.toFixed(2), 10, height - 10);
    stroke(1)
    
-  
+  if(anim)
+  {
+
+
+  let a = int(random(0,4))
+
+  if(x-1>=0 && (dupb[y][x-1]=='safe' || dupb[y][x-1]=='B' || dupb[y][x-1]=='S') && a==0)
+  {
+    starty = y;
+    startx = x-1;
+    if(board[starty][startx+1].includes('B') && board[starty][startx+1].includes('S'))
+    {
+      dupb[starty][startx+1]= 'S B' 
+    }
+    else if(board[starty][startx+1].includes('B'))
+    {
+      dupb[starty][startx+1]='B' 
+    }
+    else if(board[starty][startx+1].includes('S'))
+    {
+      dupb[starty][startx+1]='S' 
+    }
+    else
+    {
+      dupb[starty][startx+1]='safe'
+    }
+  }
+  else if(y-1>=0 && (dupb[y-1][x]=='safe' || dupb[y-1][x]=='B' || dupb[y-1][x]=='S') && a==1)
+  {
+    starty = y-1;
+    startx = x;
+    if(board[starty+1][startx].includes('B') && board[starty+1][startx].includes('S'))
+    {
+      dupb[starty+1][startx]= 'S B' 
+    }
+    else if(board[starty+1][startx].includes('S'))
+    {
+      dupb[starty+1][startx]='S' 
+    }
+    else if(board[starty+1][startx].includes('B'))
+    {
+      dupb[starty+1][startx]='B' 
+    }
+    else
+    {
+      dupb[starty+1][startx]='safe'
+    }
+  }
+  else if(y+1<=7 && (dupb[y+1][x]=='safe' || dupb[y+1][x]=='B' || dupb[y+1][x]=='S') && a==2)
+  {
+    starty = y+1;
+    startx = x;
+    if(board[starty-1][startx].includes('B') && board[starty-1][startx].includes('S'))
+    {
+      dupb[starty-1][startx]= 'S B' 
+    }
+    else if(board[starty-1][startx].includes('S'))
+    {
+      dupb[starty-1][startx]='S' 
+    }
+    else if(board[starty-1][startx].includes('B'))
+    {
+      dupb[starty-1][startx]='B' 
+    }
+    else
+    {
+      dupb[starty-1][startx]='safe'
+    }
+  }
+  else if(x+1<=7 && (dupb[y][x+1]=='safe' || dupb[y][x+1]=='B' || dupb[y][x+1]=='S') && a==3)
+  {
+    starty = y;
+    startx = x+1;
+    if(board[starty][startx-1].includes('B') && board[starty][startx-1].includes('S'))
+    {
+      dupb[starty][startx-1]= 'S B' 
+    }
+    else if(board[starty][startx-1].includes('S'))
+    {
+      dupb[starty][startx-1]='S' 
+    }
+    else if(board[starty][startx-1].includes('B'))
+    {
+      dupb[starty][startx-1]='B' 
+    }
+    else
+    {
+      dupb[starty][startx-1]='safe'
+    }
+  }
+  if(board[starty][startx].includes('G'))
+  {
+    anim=0;
+  }
+}
 
   
 }
 
+
 function mouseClicked() { 
-  if(dead == 0){
+  if(dead == 0 && anim==0){
   if(inside(70 + xr*50+50*10, 70 + yr*50, 50, 50) ){
         wdead = 1;
         dead = 1
       } 
     }
 } 
+
+
+function animate()
+{ 
+  if(anim==0)
+  {
+  anim = 1;
+}
+else{
+  anim=0
+}
+}
+ 
 
 function keyPressed() {
   if(dead == 0)
@@ -423,7 +540,6 @@ function keyPressed() {
 
     if(board[starty][startx+1].includes('B') && board[starty][startx+1].includes('S'))
     {
-      console.log('tru')
       dupb[starty][startx+1]= 'S B' 
     }
     else if(board[starty][startx+1].includes('B'))
