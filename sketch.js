@@ -9,7 +9,7 @@ let xr;
 let yr;
 let wdead = 0;
 let anim = 0;
-let hideen = 0;
+let hidden = 0;
 p5.disableFriendlyErrors = true;
 function setup() {
   background(255)
@@ -150,11 +150,9 @@ function setup() {
   }
 
 }
-    
-  
 
   colorMode(RGB);
-  // frameRate(60);
+
 }
 
 
@@ -209,23 +207,7 @@ function draw() {
         textSize(20);
         text(board[y][x], xpos, ypos, 50,50);
       }
-      else
-      {
-      stroke(0);
-      rect(xpos, ypos, 50, 50);
-      fill(0);
-      noStroke();
-      // text('', xpos, ypos, 50,50);
-      }
     }
-
-      if(inside(xpos+50*10, ypos, 50, 50) ){
-        fill(255,0,0);
-      } else {
-        // not inside
-        fill(255);
-      }
-   // colorMode(RGB);
     }
   }
 
@@ -394,9 +376,9 @@ function draw() {
    text('B - Breeze', 1200, 310)
    stroke(2)
    text('Wumpus World', 770, 50)
-   let fps = frameRate();
-  text("FPS: " + fps.toFixed(2), 10, height - 10);
-   stroke(1)
+  //  let fps = frameRate();
+  // text("FPS: " + fps.toFixed(2), 10, height - 10);
+  //  stroke(1)
    
   if(anim)
   {
